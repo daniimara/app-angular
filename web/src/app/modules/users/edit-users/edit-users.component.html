@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">
+      Edit User {{ user.name }}
+    </h1>
+
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">New User</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="userForm" (ngSubmit)="editUser(userForm.value)" novalidate>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label">Name</label>
+                <input formControlName="name" class="form-control" placeholder="your name">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <input formControlName="email" class="form-control" placeholder="your email">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label">Username</label>
+                <input formControlName="username" class="form-control" placeholder="your username">
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="form-footer">
+            <button [disabled]="!userForm.valid" type="submit"  class="btn btn-primary btn-block">Save</button>
+            <button routerLink="/users/list" type="button"  class="btn btn-success btn-block">Back</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</div>
