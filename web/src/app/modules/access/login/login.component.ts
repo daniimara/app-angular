@@ -11,15 +11,16 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   loginForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: [null, Validators.required],
       password: [null, [Validators.required, Validators.minLength(6)]]
@@ -34,4 +35,5 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/dashboard']);
     });
   }
+
 }

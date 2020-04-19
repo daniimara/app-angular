@@ -9,7 +9,7 @@ export class TopMenuComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

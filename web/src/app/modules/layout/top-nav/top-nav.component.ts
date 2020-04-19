@@ -20,4 +20,5 @@ export class TopNavComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['/login']);
   }
+
 }

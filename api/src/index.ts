@@ -1,7 +1,7 @@
 import { json, urlencoded } from 'body-parser';
 import * as cors from 'cors';
-import { load } from 'dotenv';
-import { Application, NextFunction, Request, Response } from 'express';
+import { config } from 'dotenv';
+import { Application, NextFunction, Request, Response, ErrorRequestHandler } from 'express';
 import * as express from 'express';
 import * as jwt from 'express-jwt';
 import { connect } from 'mongoose';
@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 3000;
 const WORKERS = process.env.WEB_CONCURRENCY || cpus().length;
 
 //if (process.env.NODE_ENV === 'devel') {
-  load();
+  config();
   const morgan = require('morgan');
   server.use(morgan('dev'));
 //}
@@ -42,13 +42,13 @@ function start(id: number) {
 
   server.use(
     (
-      err: ErrorEventHandler,
+      err: ErrorRequestHandler,
       req: Request,
       res: Response,
       next: NextFunction
     ) => {
       if (err.name === 'UnauthorizedError') {
-        res.status(401).json('Erro');
+        res.status(401).json(err);
       }
       next();
     }

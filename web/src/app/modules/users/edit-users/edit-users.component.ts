@@ -43,8 +43,8 @@ export class EditUsersComponent implements OnInit {
   }
 
   msg(type: any, title: any) {
-    return Swal({
-      type: type,
+    return Swal.fire({
+      icon: type,
       title: title,
       showConfirmButton: false,
       timer: 1500

@@ -41,8 +41,7 @@ export class CreateUsersComponent implements OnInit {
   createUser(user: ICreateUser) {
     this.userService.createUser(user).subscribe(
       (newUser: any) => {
-        console.log(newUser._id);
-        this.router.navigate(['/users', newUser._id, 'edit']);
+        this.router.navigate(['/users/list']);
       },
       err => console.log(err)
     );

@@ -9,7 +9,7 @@ import { UsersService } from '../services/users.service';
 @Component({
   selector: 'app-list-users',
   templateUrl: './list-users.component.html',
-  styleUrls: ['./list-users.component.css']
+  styleUrls: ['./list-users.component.css'],
 })
 export class ListUsersComponent implements OnInit {
   users$: Observable<IClients[]>;
@@ -26,23 +26,32 @@ export class ListUsersComponent implements OnInit {
   }
 
   removeUser(id: string) {
-    Swal({
+    Swal.fire({
       title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      type: 'warning',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then(result => {
-      this.userService.removeUser(id).subscribe(
-        ok => {
-          Swal('Deleted!', 'Your file hs been deleted.', 'success');
-        },
-        err => {
-          Swal('Error!', 'User not found.', 'error');
-        }
-      );
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it',
+    }).then((result) => {
+      if (result.value) {
+        this.userService.removeUser(id).subscribe(
+          (ok) => {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your file hs been deleted.',
+              icon: 'success',
+            }).then((result) => {
+              this.ngOnInit();
+            });
+          },
+          (err) => {
+            Swal.fire('Error!', 'User not found.', 'error');
+          }
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your data file is safe :)', 'error');
+      }
     });
   }
 }
